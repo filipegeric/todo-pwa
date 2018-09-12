@@ -1,0 +1,137 @@
+@import url('https://fonts.googleapis.com/css?family=Poppins');
+
+:root {
+  --theme-color: #31aaee;
+}
+
+html, body, #app {
+  height: 100%;
+  min-height: 100%;
+  border: 0;
+  margin: 0;
+  width: 100%;
+  min-width: 100%;
+  font-family: 'Poppins', sans-serif;
+}
+
+h1 {
+  margin: 0px 0px 0px 15px;
+}
+
+#app {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.container {
+  border: solid 1px var(--theme-color);
+  border-radius: 5px;
+  height: 30em;
+  width: 20em;
+  display: flex;
+  flex-direction: column;
+}
+
+.header {
+  background-color: dimgrey;
+  color: var(--theme-color);
+  border-bottom: solid 1px var(--theme-color);
+  height: 70px;
+  min-height: 70px;
+  display: flex;
+  align-items: center;
+  -webkit-box-shadow: 0px 11px 37px -2px rgba(0,0,0,0.46);
+  -moz-box-shadow: 0px 11px 37px -2px rgba(0,0,0,0.46);
+  box-shadow: 0px 11px 37px -2px rgba(0,0,0,0.46);
+}
+
+#todos {
+  overflow-y: auto;
+  overflow-x: hidden;
+  flex-grow: 2;
+}
+
+#todos::-webkit-scrollbar {
+  width: 5px;
+}
+
+#todos::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+ 
+#todos::-webkit-scrollbar-thumb {
+  background: #888;
+  border-radius: 10px; 
+}
+
+#todos::-webkit-scrollbar-thumb:hover {
+  background: #555; 
+}
+
+.todo {
+  display: flex;
+  align-items: center;
+  height: 0;
+  overflow: hidden;
+  transition: all 0.4s ease-out;
+  opacity: 0;
+}
+
+.todo.show {
+  border-top: solid 1px grey;
+  padding-left: 3px;
+  height: 4em;
+  opacity: 1;
+}
+
+.todo>p {
+  flex-grow: 1;
+}
+
+.todo>img {
+  width: 25px;
+  height: 25px;
+  padding-right: 5px;
+  cursor: pointer;
+}
+
+.close:hover {
+  transform: scale(1.15);
+}
+
+.todo:first-child {
+  border-top: none;
+}
+
+.todo:last-child {
+  border-bottom: solid 1px grey;
+}
+
+#form-wrapper {
+  border-top: solid 2px var(--theme-color);
+  display: flex;
+  height: 40px;
+  max-height: 50px;
+  padding: 5px;
+}
+
+#form-wrapper>input {
+  flex-grow: 1;
+  margin-right: 5px;
+  border-radius: 5px;
+  border-style: solid;
+  border-color: rgba(128, 128, 128, 0.856);
+  border-width: .5px;
+  font-family: inherit;
+  padding-left: 6px;
+}
+
+#submit-button {
+  border-radius: 5px;
+  background-color: var(--theme-color);
+  border-style: unset;
+  color: white;
+  font-weight: 700;
+  font-family: inherit;
+}
