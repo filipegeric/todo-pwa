@@ -96,6 +96,12 @@ h1 {
   cursor: pointer;
 }
 
+@media(max-width: 496px) {
+  .todo>img {
+    cursor: initial !important;
+  }
+}
+
 .close:hover {
   transform: scale(1.15);
 }
