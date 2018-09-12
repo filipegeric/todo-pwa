@@ -3,7 +3,7 @@
   "short_name": "TODO",
   "icons": [{
     "src": "icon.png",
-      "sizes": "144x144",
+      "sizes": "144x144 64x64",
       "type": "image/png"
     }],
   "start_url": "/index.html",
