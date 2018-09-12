@@ -16,6 +16,8 @@
       `;
     }
     todos.innerHTML += text;
+  } else {
+    storedItems = [];
   }
 
   form.addEventListener("submit", handleSubmit);
@@ -51,6 +53,9 @@
       }, 2);
     }, 100);
 
+    storedItems.push(input.value);
+    localStorage.setItem('items', JSON.stringify(storedItems));
+
     input.value = "";
     input.focus();
   }
@@ -58,6 +63,15 @@
   function handleRemove(e) {
     if (e.target && e.target.classList.value === "close") {
       e.preventDefault();
+      let index = storedItems.indexOf(e.target.parentElement.children[0].innerHTML);
+      if(index !== -1) {
+        storedItems.splice(index, 1);
+        localStorage.setItem('items', JSON.stringify(storedItems));
+        console.log(storedItems);
+      }
+      
+      
+      // this actually removes 'show' from class name
       e.target.parentElement.className = "todo";
       setTimeout(() => {
         todos.removeChild(e.target.parentElement);
