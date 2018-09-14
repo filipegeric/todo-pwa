@@ -1,4 +1,4 @@
-var cacheName = 'TodoApp1.0';
+var cacheName = 'TodoApp1.1';
 var filesToCache = [
   '/',
   '/index.html',

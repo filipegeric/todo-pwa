@@ -4,28 +4,16 @@
   let submitButton = document.getElementById('submit-button');
   let input = document.getElementById('input');
   let storedItems = JSON.parse(localStorage.getItem('items'));
+  let sw = null;
 
   if ('serviceWorker' in navigator) {
-    navigator.serviceWorker.register('./service-worker.js').then(() => {
+    navigator.serviceWorker.register('./service-worker.js').then((swReg) => {
+      sw = swReg;
       console.log('Service Worker Registered');
     });
   }
 
-  if (storedItems) {
-    let text = '';
-    for (let i = 0; i < storedItems.length; i++) {
-      text += `
-        <div class="todo show">
-          <p>${storedItems[i]}</p>
-          <img class="close" src="close.svg">
-        </div>
-      `;
-    }
-    todos.innerHTML += text;
-  } else {
-    storedItems = [];
-  }
-
+  checkStoredItems();
   form.addEventListener('submit', handleSubmit);
   submitButton.addEventListener('click', handleSubmit);
   todos.addEventListener('click', handleRemove);
@@ -35,15 +23,10 @@
     if (!input.value) {
       return;
     }
-    let newTodo = document.createElement('div');
-    newTodo.className = 'todo';
-    newTodo.innerHTML = `
-      <p>${input.value}</p>
-      <img class="close" src="close.svg">
-    `;
+    let newTodo = composeNewTodo(input.value);
     todos.appendChild(newTodo);
     setTimeout(function() {
-      newTodo.className = newTodo.className + ' show';
+      newTodo.className += ' show';
     }, 10);
 
     // scroll to bottom animation after adding new item
@@ -71,7 +54,7 @@
       e.preventDefault();
 
       let index = storedItems.indexOf(
-        e.target.parentElement.children[0].innerHTML
+        e.target.parentElement.children[0].innerText
       );
       if (index !== -1) {
         storedItems.splice(index, 1);
@@ -84,6 +67,39 @@
       setTimeout(() => {
         todos.removeChild(e.target.parentElement);
       }, 400);
+    }
+  }
+
+  function composeNewTodo(string, show = false) {
+    let newTodo = document.createElement('div');
+    if (show) {
+      newTodo.className = 'todo show';
+    } else {
+      newTodo.className = 'todo';
+    }
+    let paragraphElement = document.createElement('p');
+    paragraphElement.innerText = string;
+    let imgElement = document.createElement('img');
+    imgElement.className = 'close';
+    imgElement.setAttribute('src', 'close.svg');
+    newTodo.appendChild(paragraphElement);
+    newTodo.appendChild(imgElement);
+    return newTodo;
+  }
+
+  function checkStoredItems() {
+    if (storedItems) {
+      for (let i = 0; i < storedItems.length; i++) {
+        todos.appendChild(composeNewTodo(storedItems[i], false));
+      }
+      setTimeout(() => {
+        let a = document.querySelectorAll('.todo');
+        for (let i = 0; i < a.length; i++) {
+          a[i].className += ' show';
+        }
+      }, 50);
+    } else {
+      storedItems = [];
     }
   }
 })();

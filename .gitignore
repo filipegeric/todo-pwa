@@ -1,2 +1,6 @@
 todo
 .prettierrc
+.firebaserc
+firebase.json
+.firebase/
+initializeFirebase.js

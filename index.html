@@ -8,7 +8,7 @@
   <link rel="shortcut icon" href="icon.png" type="image/png">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" type="text/css" media="screen" href="main.css" />
-  <link rel="manifest" href="/todo-pwa/manifest.json">
+  <link rel="manifest" href="manifest.json">
 </head>
 
 <body>
@@ -16,7 +16,7 @@
   <div id="app">
     <div class="container">
       <div class="header">
-        <h1>TODO App</h1>
+        <h1>TODO PWA</h1>
       </div>
 
       <div id="todos">
@@ -32,6 +32,8 @@
     </div>
   </div>
 
+  <script src="https://www.gstatic.com/firebasejs/5.4.2/firebase.js"></script>
+  <script src="initializeFirebase.js"></script>
   <script src="main.js"></script>
 </body>
 
