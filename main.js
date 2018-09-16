@@ -1,16 +1,16 @@
 'use strict';
 
 (function() {
-  let todos = document.getElementById('todos');
-  let form = document.getElementById('form');
-  let submitButton = document.getElementById('submit-button');
-  let input = document.getElementById('input');
+  const todos = document.getElementById('todos');
+  const form = document.getElementById('form');
+  const submitButton = document.getElementById('submit-button');
+  const input = document.getElementById('input');
   let storedItems = JSON.parse(localStorage.getItem('items'));
   let sw = null;
 
   if ('serviceWorker' in navigator && 'PushManager' in window) {
     navigator.serviceWorker
-      .register('./service-worker.js')
+      .register('service-worker.js')
       .then(swReg => {
         sw = swReg;
         console.log('Service Worker Registered', sw);
@@ -42,9 +42,12 @@
         console.log(JSON.stringify(subscription));
         // this is just temporary
         // here subscription should be sent to the server and stored in database
-        let s = composeNewTodo(JSON.stringify(subscription), true);
+        const s = composeNewTodo(JSON.stringify(subscription), true);
         s.setAttribute('style', 'height: 100%; word-wrap: break-word;');
-        s.children[0].setAttribute('style', 'word-wrap: break-word; width: 100%; height: 100%;');
+        s.children[0].setAttribute(
+          'style',
+          'word-wrap: break-word; width: 100%; height: 100%;'
+        );
         todos.appendChild(s);
         //-----------------------
       });
@@ -70,7 +73,7 @@
     if (!input.value) {
       return;
     }
-    let newTodo = composeNewTodo(input.value);
+    const newTodo = composeNewTodo(input.value);
     todos.appendChild(newTodo);
     setTimeout(function() {
       newTodo.className += ' show';
@@ -78,11 +81,12 @@
 
     // scroll to bottom animation after adding new item
     setTimeout(() => {
-      let interval = setInterval(() => {
+      const interval = setInterval(() => {
         todos.scrollTop = todos.scrollTop + 1;
         if (
-          todos.scrollTop - (todos.scrollHeight - todos.clientHeight) >= -5 &&
-          todos.scrollTop - (todos.scrollHeight - todos.clientHeight) <= 5
+          Math.abs(
+            todos.scrollTop - (todos.scrollHeight - todos.clientHeight)
+          ) <= 5
         ) {
           clearInterval(interval);
         }
@@ -100,7 +104,7 @@
     if (e.target && e.target.classList.value === 'close') {
       e.preventDefault();
 
-      let index = storedItems.indexOf(
+      const index = storedItems.indexOf(
         e.target.parentElement.children[0].innerText
       );
       if (index !== -1) {
@@ -118,15 +122,15 @@
   }
 
   function composeNewTodo(string, show = false) {
-    let newTodo = document.createElement('div');
+    const newTodo = document.createElement('div');
     if (show) {
       newTodo.className = 'todo show';
     } else {
       newTodo.className = 'todo';
     }
-    let paragraphElement = document.createElement('p');
+    const paragraphElement = document.createElement('p');
     paragraphElement.innerText = string;
-    let imgElement = document.createElement('img');
+    const imgElement = document.createElement('img');
     imgElement.className = 'close';
     imgElement.setAttribute('src', 'close.svg');
     newTodo.appendChild(paragraphElement);
@@ -140,7 +144,7 @@
         todos.appendChild(composeNewTodo(storedItems[i], false));
       }
       setTimeout(() => {
-        let a = document.querySelectorAll('.todo');
+        const a = document.querySelectorAll('.todo');
         for (let i = 0; i < a.length; i++) {
           a[i].className += ' show';
         }
