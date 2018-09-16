@@ -8,4 +8,4 @@ It uses localStorage to store data on client.
 
 ## Demo
 
-(https://todo-pwa-5b853.firebaseapp.com/)
+https://todo-pwa-5b853.firebaseapp.com/
