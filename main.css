@@ -2,6 +2,7 @@
 
 :root {
   --theme-color: #31aaee;
+  --box-shadow: 0 0 4px rgba(0,0,0,.14), 0 4px 8px rgba(0,0,0,.28);
 }
 
 html, body, #app {
@@ -42,9 +43,9 @@ h1 {
   min-height: 70px;
   display: flex;
   align-items: center;
-  -webkit-box-shadow: 0 0 4px rgba(0,0,0,.14), 0 4px 8px rgba(0,0,0,.28);
-  -moz-box-shadow: 0 0 4px rgba(0,0,0,.14), 0 4px 8px rgba(0,0,0,.28);
-  box-shadow: 0 0 4px rgba(0,0,0,.14), 0 4px 8px rgba(0,0,0,.28);
+  -webkit-box-shadow: var(--box-shadow);
+  -moz-box-shadow: var(--box-shadow);
+  box-shadow: var(--box-shadow);
 }
 
 #todos {
@@ -117,7 +118,7 @@ h1 {
   padding: 5px;
 }
 
-#form-wrapper>input {
+#input {
   flex-grow: 1;
   margin-right: 5px;
   border-radius: 5px;
